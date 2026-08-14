@@ -2,3 +2,15 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ../../base
+
+# Day-2 staffing: give this agent the team's operating memory.
+patches:
+  - target:
+      kind: AgentWorkstation
+      name: monday-ops-reporter
+    patch: |-
+      - op: add
+        path: /spec/memory
+        value:
+          modules:
+            - name: supply-chain-handbook
